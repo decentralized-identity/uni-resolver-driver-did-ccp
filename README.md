@@ -2,17 +2,17 @@
 
 # Universal Resolver Driver: did:ccp
 
-This is a [Universal Resolver](https://github.com/decentralized-identity/universal-resolver/) driver for **did:ccp** identifiers.
+This is a [Universal Resolver](https://github.com/decentralized-identity/universal-resolver/) driver for Baidu **did:ccp** identifiers.
 
 More info: 
 
-- [Solution Homepage](https://cloud.baidu.com/solution/digitalIdentity.html)
+- [Solution Homepage on Baidu Cloud](https://cloud.baidu.com/solution/digitalIdentity.html)
 - [Docs Homepage](https://did.baidu.com)
 
 ## Specifications
 
-* [Decentralized Identifiers](https://w3c.github.io/did-core/)
-* [DID Method Specification](https://did.baidu.com/did-spec/)
+* [W3C Decentralized Identifiers](https://w3c.github.io/did-core/)
+* [Baidu DID Method Specification](https://did.baidu.com/did-spec/)
 
 ## Example DIDs
 
@@ -31,7 +31,7 @@ curl -X GET http://localhost:8080/1.0/identifiers/did:ccp:ceNobbK6Me9F5zwyE3MKY8
 
 ## Build (native Java)
 
- 1. First, build https://github.com/decentralized-identity/universal-resolver/tree/master/resolver/java
+First, build https://github.com/decentralized-identity/uni-resolver-driver-did-ccp
 
 Then run:
 
