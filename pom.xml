@@ -4,7 +4,7 @@
 	<artifactId>uni-resolver-driver-did-ccp</artifactId>
 	<packaging>${packaging.type}</packaging>
 	<name>uni-resolver-driver-did-ccp</name>
-	<version>0.1.0</version>
+	<version>0.1.1-SNAPSHOT</version>
 
 	<parent>
 		<groupId>decentralized-identity</groupId>
@@ -16,7 +16,7 @@
 		<url>https://github.com/decentralized-identity/uni-resolver-driver-did-ccp</url>
 		<connection>scm:git:git://github.com/decentralized-identity/uni-resolver-driver-did-ccp.git</connection>
 		<developerConnection>scm:git:git@github.com:decentralized-identity/uni-resolver-driver-did-ccp.git</developerConnection>
-  	  <tag>v0.1.0</tag>
+  	  <tag>HEAD</tag>
   </scm>
 
 	<distributionManagement>
