@@ -3,10 +3,7 @@ name: CI/CD Workflow for driver-did-ccp
 on:
   push:
     branches:
-      - master
-  pull_request:
-    branches:
-      - master
+      - release-0.1.x
 
 jobs:
   build:
@@ -16,7 +13,8 @@ jobs:
     - name: Docker Build and Push
       uses: danubetech/github-action-docker-build-push@master
       env:
+        MAVEN_SETTINGS: ${{secrets.MAVEN_SETTINGS}}
         DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
         DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
         DOCKER_FILE: docker/Dockerfile
-        CONTAINER_TAG: universalresolver/driver-did-ccp:latest
+        CONTAINER_TAG: universalresolver/driver-did-ccp:0.1.0

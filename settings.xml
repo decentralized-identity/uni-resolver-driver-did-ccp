@@ -9,20 +9,41 @@
     <profile>
       <id>github</id>
       <repositories>
-	<repository>
-          <id>github</id>
+	    <repository>
+          <id>github-ur</id>
           <name>GitHub decentralized-identity uni-resolver</name>
           <url>https://maven.pkg.github.com/decentralized-identity/universal-resolver</url>
         </repository>	
+	    <repository>
+          <id>github-didcom</id>
+          <name>GitHub decentralized-identity did-common-java</name>
+          <url>https://maven.pkg.github.com/decentralized-identity/did-common-java</url>
+        </repository>
+        <repository>
+          <id>github-ccp</id>
+          <name>GitHub decentralized-identity uni-resolver-driver-did-ccp</name>
+          <url>https://maven.pkg.github.com/decentralized-identity/uni-resolver-driver-did-ccp</url>
+        </repository>
       </repositories>
     </profile>
   </profiles>
   <servers>
     <server>
-      <id>github</id>
+      <id>github-ur</id>
+      <username>OWNER</username>
+      <password>TOKEN</password>
+    </server>
+    <server>
+      <id>githubb-didcom</id>
+      <username>OWNER</username>
+      <password>TOKEN</password>
+    </server>
+    <server>
+      <id>github-ccp</id>
       <username>OWNER</username>
       <password>TOKEN</password>
     </server>
   </servers>
-
 </settings>
+
+

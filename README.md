@@ -38,7 +38,6 @@ For downloading the dependencies of this project a Personal Access Token for Git
 
 Maven build:
 
-	cd resolver/java
 	mvn --settings settings.xml clean install
 
 
