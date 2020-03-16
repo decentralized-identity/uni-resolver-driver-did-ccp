@@ -9,8 +9,22 @@
 	<parent>
 		<groupId>decentralized-identity</groupId>
 		<artifactId>uni-resolver</artifactId>
-		<version>0.1-SNAPSHOT</version>
+		<version>0.1.0</version>
 	</parent>
+
+	<scm>
+		<url>https://github.com/decentralized-identity/uni-resolver-driver-did-ccp</url>
+		<connection>scm:git:git://github.com/decentralized-identity/uni-resolver-driver-did-ccp.git</connection>
+		<developerConnection>scm:git:git@github.com:decentralized-identity/uni-resolver-driver-did-ccp.git</developerConnection>
+	</scm>
+
+	<distributionManagement>
+		<repository>
+			<id>github-ccp</id>
+			<name>GitHub decentralized-identity uni-resolver-driver-did-ccp</name>
+			<url>https://maven.pkg.github.com/decentralized-identity/uni-resolver-driver-did-ccp</url>
+		</repository>
+	</distributionManagement>
 
 	<profiles>
 
@@ -86,6 +100,23 @@
 							</dependency>
 						</dependencies>
 					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-release-plugin</artifactId>
+						<version>3.0.0-M1</version>
+						<configuration>
+							<tagNameFormat>v@{project.version}</tagNameFormat>
+							<scmReleaseCommitComment>Latest Release @{releaseLabel}</scmReleaseCommitComment>
+							<pomFileName>pom.xml</pomFileName>
+						</configuration>
+						<dependencies>
+							<dependency>
+								<groupId>org.apache.maven.plugins</groupId>
+								<artifactId>maven-scm-plugin</artifactId>
+								<version>1.8.1</version>
+							</dependency>
+						</dependencies>
+					</plugin>
 				</plugins>
 			</build>
 
@@ -97,8 +128,7 @@
 		<dependency>
 			<groupId>decentralized-identity</groupId>
 			<artifactId>uni-resolver-driver</artifactId>
-			<version>0.1-SNAPSHOT</version>
-			<scope>compile</scope>
+			<version>0.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.json</groupId>
