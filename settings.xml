@@ -1,0 +1,50 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                      http://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <activeProfiles>
+    <activeProfile>github</activeProfile>
+  </activeProfiles>
+  <profiles>
+    <profile>
+      <id>github</id>
+      <repositories>
+	    <repository>
+          <id>github-ur</id>
+          <name>GitHub decentralized-identity uni-resolver</name>
+          <url>https://maven.pkg.github.com/decentralized-identity/universal-resolver</url>
+        </repository>
+        <repository>
+          <id>github-didcom</id>
+          <name>GitHub decentralized-identity did-common-java</name>
+          <url>https://maven.pkg.github.com/decentralized-identity/did-common-java</url>
+        </repository>
+	    <repository>
+          <id>github-ccp</id>
+          <name>GitHub decentralized-identity uni-resolver-driver-did-ccp</name>
+          <url>https://maven.pkg.github.com/decentralized-identity/uni-resolver-driver-did-ccp</url>
+        </repository>
+      </repositories>
+    </profile>
+  </profiles>
+  <servers>
+    <server>
+      <id>github-ur</id>
+      <username>azuzi</username>
+      <password>f64c3437e200efc3dbedfaa0450aff7bc28e9917</password>
+    </server>
+    <server>
+      <id>github-didcom</id>
+      <username>azuzi</username>
+      <password>f64c3437e200efc3dbedfaa0450aff7bc28e9917</password>
+    </server>
+    <server>
+      <id>github-ccp</id>
+      <username>OWNER</username>
+      <password>TOKEN</password>
+    </server>
+  </servers>
+</settings>
+
+
+

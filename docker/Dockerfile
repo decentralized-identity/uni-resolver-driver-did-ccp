@@ -6,7 +6,7 @@ MAINTAINER Markus Sabadello <markus@danubetech.com>
 # build driver-did-ccp
 
 ADD . /opt/driver-did-ccp
-RUN cd /opt/driver-did-ccp && mvn clean install package -N -DskipTests
+RUN cd /opt/driver-did-ccp && mvn --settings settings.xml clean install package -N -DskipTests
 
 # done
 
