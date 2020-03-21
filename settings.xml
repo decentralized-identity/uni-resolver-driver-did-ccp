@@ -30,13 +30,13 @@
   <servers>
     <server>
       <id>github-ur</id>
-      <username>azuzi</username>
-      <password>f64c3437e200efc3dbedfaa0450aff7bc28e9917</password>
+      <username>OWNER</username>
+      <password>TOKEN</password>
     </server>
     <server>
       <id>github-didcom</id>
-      <username>azuzi</username>
-      <password>f64c3437e200efc3dbedfaa0450aff7bc28e9917</password>
+      <username>OWNER</username>
+      <password>TOKEN</password>
     </server>
     <server>
       <id>github-ccp</id>
