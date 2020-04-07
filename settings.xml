@@ -19,29 +19,19 @@
           <name>GitHub decentralized-identity did-common-java</name>
           <url>https://maven.pkg.github.com/decentralized-identity/did-common-java</url>
         </repository>
-	    <repository>
-          <id>github-ccp</id>
-          <name>GitHub decentralized-identity uni-resolver-driver-did-ccp</name>
-          <url>https://maven.pkg.github.com/decentralized-identity/uni-resolver-driver-did-ccp</url>
-        </repository>
       </repositories>
     </profile>
   </profiles>
   <servers>
     <server>
       <id>github-ur</id>
-      <username>OWNER</username>
-      <password>TOKEN</password>
+      <username>${env.GITHUB_READ_PACKAGES_OWNER}</username>
+      <password>${env.GITHUB_READ_PACKAGES_TOKEN}</password>
     </server>
     <server>
       <id>github-didcom</id>
-      <username>OWNER</username>
-      <password>TOKEN</password>
-    </server>
-    <server>
-      <id>github-ccp</id>
-      <username>OWNER</username>
-      <password>TOKEN</password>
+      <username>${env.GITHUB_READ_PACKAGES_OWNER}</username>
+      <password>${env.GITHUB_READ_PACKAGES_TOKEN}</password>
     </server>
   </servers>
 </settings>

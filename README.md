@@ -22,7 +22,11 @@ did:ccp:3CzQLF3qfFVQ1CjGVzVRZaFXrjAd
 ```
 ## Configuration
 For downloading the dependencies of this project a Personal Access Token for GitHub must be configured in file [settings.xml](https://github.com/decentralized-identity/uni-resolver-driver-did-ccp/blob/release-0.1.x/settings.xml) according to [Creating a personal access token for the command line](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line).
+Then, add the USER Name and TOKEN to the environment variable as follows,
 
+    GITHUB_READ_PACKAGES_OWNER=OWNER
+    GITHUB_READ_PACKAGES_TOKEN=TOKEN
+    
 ## Build and Run (Docker)
 
 ```
