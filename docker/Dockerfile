@@ -3,10 +3,17 @@
 FROM universalresolver/base-ubuntu
 MAINTAINER Markus Sabadello <markus@danubetech.com>
 
+# install dependencies
+
+ARG GITHUB_READ_PACKAGES_OWNER
+ARG GITHUB_READ_PACKAGES_TOKEN
+ADD ./settings.xml /root/.m2/
+
 # build driver-did-ccp
 
 ADD . /opt/driver-did-ccp
-RUN cd /opt/driver-did-ccp && mvn --settings settings.xml clean install package -N -DskipTests
+
+RUN cd /opt/driver-did-ccp && mvn clean install package -N -DskipTests
 
 # done
 
