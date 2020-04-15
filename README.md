@@ -2,17 +2,16 @@
 
 # Universal Resolver Driver: did:ccp
 
-This is a [Universal Resolver](https://github.com/decentralized-identity/universal-resolver/) driver for Baidu **did:ccp** identifiers.
+This is a [Universal Resolver](https://github.com/decentralized-identity/universal-resolver/) driver for ABT DID provided by ArcBlock **did:abt** identifiers.
 
 More info: 
 
-- [Solution Homepage on Baidu Cloud](https://cloud.baidu.com/solution/digitalIdentity.html)
-- [Docs Homepage](https://did.baidu.com)
+- [Solution Homepage](https://www.abtnetwork.io/en/)
 
 ## Specifications
 
 * [W3C Decentralized Identifiers](https://w3c.github.io/did-core/)
-* [Baidu DID Method Specification](https://did.baidu.com/did-spec/)
+* [ABT DID Method Specification](https://arcblock.github.io/abt-did-spec/)
 
 ## Example DIDs
 
@@ -49,7 +48,3 @@ The driver returns the following metadata in addition to a DID document:
 * `proof`: Some proof info about the DID document.
 * `created`: The DID create time.
 * `updated`: The DID document last update time.
-
-## Maintainer
-
-- Hongbin Mao [@hello2mao](https://github.com/hello2mao)

@@ -34,15 +34,17 @@ public class DidCcpDriver implements Driver {
 
 	private static Logger log = LoggerFactory.getLogger(DidCcpDriver.class);
 
-	public static final Pattern DID_CCP_PATTERN = Pattern.compile("^did:ccp:([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{25,34})$");
+	// public static final Pattern DID_CCP_PATTERN =
+	// Pattern.compile("^did:ccp:([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{25,34})$");
 
 	public static final String[] DIDDOCUMENT_PUBLICKEY_TYPES = new String[] { "Secp256k1" };
 
 	public static final String[] DIDDOCUMENT_AUTHENTICATION_TYPES = new String[] { "Secp256k1" };
 
-	public static final String DEFAULT_CCP_URL = "https://did.baidu.com";
+	public static final String DEFAULT_CCP_URL = "https://did.abtnetwork.io";
 
-	public static final HttpClient DEFAULT_HTTP_CLIENT = HttpClientBuilder.create().setRedirectStrategy(new LaxRedirectStrategy()).build();
+	public static final HttpClient DEFAULT_HTTP_CLIENT = HttpClientBuilder.create()
+			.setRedirectStrategy(new LaxRedirectStrategy()).build();
 
 	private String ccpUrl = DEFAULT_CCP_URL;
 
@@ -54,21 +56,22 @@ public class DidCcpDriver implements Driver {
 	@Override
 	public ResolveResult resolve(String identifier) throws ResolutionException {
 		// match
-		Matcher matcher = DID_CCP_PATTERN.matcher(identifier);
-		if(!matcher.matches()) {
-			return null;
-		}
+		// Matcher matcher = DID_CCP_PATTERN.matcher(identifier);
+		// if(!matcher.matches()) {
+		// return null;
+		// }
 
 		// fetch data from CCP
-		String resolveUrl = this.getCCPUrl() + "/v1/did/resolve/" + identifier;
+		String resolveUrl = this.getCCPUrl() + "/1.0/identifiers/" + identifier;
 		HttpGet httpGet = new HttpGet(resolveUrl);
 
 		// find the DDO
 		JSONObject didDocumentDO;
 		try {
 			CloseableHttpResponse httpResponse = (CloseableHttpResponse) this.getHttpClient().execute(httpGet);
-			if(httpResponse.getStatusLine().getStatusCode() != 200) {
-				throw new ResolutionException("Cannot retrieve DDO for `" + identifier + "` from `" + this.getCCPUrl() + ": " + httpResponse.getStatusLine());
+			if (httpResponse.getStatusLine().getStatusCode() != 200) {
+				throw new ResolutionException("Cannot retrieve DDO for `" + identifier + "` from `" + this.getCCPUrl() + ": "
+						+ httpResponse.getStatusLine());
 			}
 
 			// extract payload
@@ -78,11 +81,13 @@ public class DidCcpDriver implements Driver {
 
 			// get DDO
 			JSONObject jo = new JSONObject(entityString);
-			didDocumentDO = jo.getJSONObject("content").getJSONObject("didDocument");
+			didDocumentDO = jo.getJSONObject("didDocument");
 		} catch (IOException ex) {
-			throw new ResolutionException("Cannot retrieve DDO info for `" + identifier + "` from `" + this.getCCPUrl() + "`: " + ex.getMessage(), ex);
+			throw new ResolutionException(
+					"Cannot retrieve DDO info for `" + identifier + "` from `" + this.getCCPUrl() + "`: " + ex.getMessage(), ex);
 		} catch (JSONException jex) {
-			throw new ResolutionException("Cannot parse JSON response from `" + this.getCCPUrl() + "`: " + jex.getMessage(), jex);
+			throw new ResolutionException("Cannot parse JSON response from `" + this.getCCPUrl() + "`: " + jex.getMessage(),
+					jex);
 		}
 
 		// DDO id
@@ -90,31 +95,23 @@ public class DidCcpDriver implements Driver {
 
 		// DDO publicKeys
 		List<PublicKey> publicKeys = new ArrayList<>();
-		// index 0 is auth key
-		JSONObject firstKeyJO = didDocumentDO.getJSONArray("publicKey").getJSONObject(0);
-		publicKeys.add(PublicKey.build(
-				firstKeyJO.getString("id"),
-				DIDDOCUMENT_PUBLICKEY_TYPES,
-				null,
-				null,
-				firstKeyJO.getString("publicKeyHex"),
-				null));
-		// index 1 is recovery key
-		JSONObject secondKeyJO = didDocumentDO.getJSONArray("publicKey").getJSONObject(1);
-		publicKeys.add(PublicKey.build(
-				secondKeyJO.getString("id"),
-				DIDDOCUMENT_PUBLICKEY_TYPES,
-				null,
-				null,
-				secondKeyJO.getString("publicKeyHex"),
-				null));
+		// // index 0 is auth key
+		// JSONObject firstKeyJO =
+		// didDocumentDO.getJSONArray("publicKey").getJSONObject(0);
+		// publicKeys.add(PublicKey.build(firstKeyJO.getString("id"),
+		// DIDDOCUMENT_PUBLICKEY_TYPES, null, null,
+		// firstKeyJO.getString("publicKeyHex"), null));
+		// // index 1 is recovery key
+		// JSONObject secondKeyJO =
+		// didDocumentDO.getJSONArray("publicKey").getJSONObject(1);
+		// publicKeys.add(PublicKey.build(secondKeyJO.getString("id"),
+		// DIDDOCUMENT_PUBLICKEY_TYPES, null, null,
+		// secondKeyJO.getString("publicKeyHex"), null));
 
 		// DDO Authentications
 		List<Authentication> authentications = new ArrayList<>();
-		authentications.add(Authentication.build(
-				null,
-				DIDDOCUMENT_AUTHENTICATION_TYPES,
-				firstKeyJO.getString("id")));
+		// authentications.add(Authentication.build(null,
+		// DIDDOCUMENT_AUTHENTICATION_TYPES, firstKeyJO.getString("id")));
 
 		// DDO services
 		List<Service> services = new ArrayList<>();
@@ -129,10 +126,10 @@ public class DidCcpDriver implements Driver {
 
 		// create Method METADATA
 		Map<String, Object> methodMetadata = new LinkedHashMap<>();
-		methodMetadata.put("version", didDocumentDO.getInt("version"));
-		methodMetadata.put("proof", didDocumentDO.getJSONObject("proof").toMap());
-		methodMetadata.put("created", didDocumentDO.getString("created"));
-		methodMetadata.put("updated", didDocumentDO.getString("updated"));
+		// methodMetadata.put("version", didDocumentDO.getInt("version"));
+		// methodMetadata.put("proof", didDocumentDO.getJSONObject("proof").toMap());
+		// methodMetadata.put("created", didDocumentDO.getString("created"));
+		// methodMetadata.put("updated", didDocumentDO.getString("updated"));
 
 		// create RESOLVE RESULT
 		ResolveResult resolveResult = ResolveResult.build(didDocument, null, methodMetadata);
