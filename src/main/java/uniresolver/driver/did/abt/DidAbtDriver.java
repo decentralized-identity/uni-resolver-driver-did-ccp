@@ -1,4 +1,4 @@
-package uniresolver.driver.did.ccp;
+package uniresolver.driver.did.abt;
 
 import did.Authentication;
 import did.DIDDocument;
@@ -30,39 +30,39 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DidCcpDriver implements Driver {
+public class DidAbtDriver implements Driver {
 
-	private static Logger log = LoggerFactory.getLogger(DidCcpDriver.class);
+	private static Logger log = LoggerFactory.getLogger(DidAbtDriver.class);
 
-	// public static final Pattern DID_CCP_PATTERN =
-	// Pattern.compile("^did:ccp:([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{25,34})$");
+	// public static final Pattern DID_ABT_PATTERN =
+	// Pattern.compile("^did:abt:([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{25,34})$");
 
 	public static final String[] DIDDOCUMENT_PUBLICKEY_TYPES = new String[] { "Secp256k1" };
 
 	public static final String[] DIDDOCUMENT_AUTHENTICATION_TYPES = new String[] { "Secp256k1" };
 
-	public static final String DEFAULT_CCP_URL = "https://did.abtnetwork.io";
+	public static final String DEFAULT_ABT_URL = "https://did.abtnetwork.io";
 
 	public static final HttpClient DEFAULT_HTTP_CLIENT = HttpClientBuilder.create()
 			.setRedirectStrategy(new LaxRedirectStrategy()).build();
 
-	private String ccpUrl = DEFAULT_CCP_URL;
+	private String abtUrl = DEFAULT_ABT_URL;
 
 	private HttpClient httpClient = DEFAULT_HTTP_CLIENT;
 
-	public DidCcpDriver() {
+	public DidAbtDriver() {
 	}
 
 	@Override
 	public ResolveResult resolve(String identifier) throws ResolutionException {
 		// match
-		// Matcher matcher = DID_CCP_PATTERN.matcher(identifier);
+		// Matcher matcher = DID_ABT_PATTERN.matcher(identifier);
 		// if(!matcher.matches()) {
 		// return null;
 		// }
 
-		// fetch data from CCP
-		String resolveUrl = this.getCCPUrl() + "/1.0/identifiers/" + identifier;
+		// fetch data from ABT
+		String resolveUrl = this.getABTUrl() + "/1.0/identifiers/" + identifier;
 		HttpGet httpGet = new HttpGet(resolveUrl);
 
 		// find the DDO
@@ -70,7 +70,7 @@ public class DidCcpDriver implements Driver {
 		try {
 			CloseableHttpResponse httpResponse = (CloseableHttpResponse) this.getHttpClient().execute(httpGet);
 			if (httpResponse.getStatusLine().getStatusCode() != 200) {
-				throw new ResolutionException("Cannot retrieve DDO for `" + identifier + "` from `" + this.getCCPUrl() + ": "
+				throw new ResolutionException("Cannot retrieve DDO for `" + identifier + "` from `" + this.getABTUrl() + ": "
 						+ httpResponse.getStatusLine());
 			}
 
@@ -84,9 +84,9 @@ public class DidCcpDriver implements Driver {
 			didDocumentDO = jo.getJSONObject("didDocument");
 		} catch (IOException ex) {
 			throw new ResolutionException(
-					"Cannot retrieve DDO info for `" + identifier + "` from `" + this.getCCPUrl() + "`: " + ex.getMessage(), ex);
+					"Cannot retrieve DDO info for `" + identifier + "` from `" + this.getABTUrl() + "`: " + ex.getMessage(), ex);
 		} catch (JSONException jex) {
-			throw new ResolutionException("Cannot parse JSON response from `" + this.getCCPUrl() + "`: " + jex.getMessage(),
+			throw new ResolutionException("Cannot parse JSON response from `" + this.getABTUrl() + "`: " + jex.getMessage(),
 					jex);
 		}
 
@@ -142,7 +142,7 @@ public class DidCcpDriver implements Driver {
 	public Map<String, Object> properties() {
 
 		Map<String, Object> properties = new HashMap<>();
-		properties.put("ccpUrl", this.getCCPUrl());
+		properties.put("abtUrl", this.getABTUrl());
 
 		return properties;
 	}
@@ -151,13 +151,13 @@ public class DidCcpDriver implements Driver {
 	 * Getters and setters
 	 */
 
-	public String getCCPUrl() {
+	public String getABTUrl() {
 
-		return this.ccpUrl;
+		return this.abtUrl;
 	}
 
-	public void setCCPUrl(String ccpUrl) {
-		this.ccpUrl = ccpUrl;
+	public void setABTUrl(String abtUrl) {
+		this.abtUrl = abtUrl;
 	}
 
 	public HttpClient getHttpClient() {

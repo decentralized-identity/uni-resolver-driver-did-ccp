@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	id="WebApp_ID" version="2.5" metadata-complete="true">
 
-	<display-name>uni-resolver-driver-did-ccp</display-name>
+	<display-name>uni-resolver-driver-did-abt</display-name>
 
 	<!-- SERVLET -->
 
@@ -14,7 +14,7 @@
 		<servlet-class>uniresolver.driver.servlet.InitServlet</servlet-class>
 		<init-param>
 			<param-name>Driver</param-name>
-			<param-value>uniresolver.driver.did.ccp.DidCcpDriver</param-value>
+			<param-value>uniresolver.driver.did.abt.DidAbtDriver</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>

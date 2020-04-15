@@ -1,6 +1,6 @@
 ![DIF Logo](https://raw.githubusercontent.com/decentralized-identity/universal-resolver/master/docs/logo-dif.png)
 
-# Universal Resolver Driver: did:ccp
+# Universal Resolver Driver: did:abt
 
 This is a [Universal Resolver](https://github.com/decentralized-identity/universal-resolver/) driver for ABT DID provided by ArcBlock **did:abt** identifiers.
 
@@ -16,11 +16,11 @@ More info:
 ## Example DIDs
 
 ```
-did:ccp:ceNobbK6Me9F5zwyE3MKY88QZLw
-did:ccp:3CzQLF3qfFVQ1CjGVzVRZaFXrjAd
+did:abt:z116ygT18P67xBp3scBtZLU6xVoDy268bgnU
+did:abt:z11MVbRGLFt6RXaHzX7Xj7rmHfeiyFkJiiRE
 ```
 ## Configuration
-For downloading the dependencies of this project a Personal Access Token for GitHub must be configured in file [settings.xml](https://github.com/decentralized-identity/uni-resolver-driver-did-ccp/blob/release-0.1.x/settings.xml) according to [Creating a personal access token for the command line](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line).
+For downloading the dependencies of this project a Personal Access Token for GitHub must be configured in file `settings.xml` according to [Creating a personal access token for the command line](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line).
 Then, add the USER Name and TOKEN to the environment variable as follows,
 
     GITHUB_READ_PACKAGES_OWNER=OWNER
@@ -28,9 +28,9 @@ Then, add the USER Name and TOKEN to the environment variable as follows,
 ## Build and Run (Docker)
 
 ```
-docker build -f ./docker/Dockerfile . -t hello2mao/driver-did-ccp
-docker run -p 8080:8080 hello2mao/driver-did-ccp
-curl -X GET http://localhost:8080/1.0/identifiers/did:ccp:ceNobbK6Me9F5zwyE3MKY88QZLw
+docker build -f ./docker/Dockerfile . -t arcblock/driver-did-abt
+docker run -p 8080:8080 arcblock/driver-did-abt
+curl -X GET http://localhost:8080/1.0/identifiers/did:abt:z116ygT18P67xBp3scBtZLU6xVoDy268bgnU
 ```
 
 ## Build (native Java)

@@ -1,4 +1,4 @@
-name: CI/CD Workflow for driver-did-ccp
+name: CI/CD Workflow for driver-did-abt
 
 on:
   push:
@@ -20,4 +20,4 @@ jobs:
         DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
         DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
         DOCKER_FILE: docker/Dockerfile
-        CONTAINER_TAG: universalresolver/driver-did-ccp:latest
+        CONTAINER_TAG: universalresolver/driver-did-abt:latest
