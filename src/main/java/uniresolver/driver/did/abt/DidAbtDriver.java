@@ -34,10 +34,7 @@ public class DidAbtDriver implements Driver {
 
 	private static Logger log = LoggerFactory.getLogger(DidAbtDriver.class);
 
-	public static final Pattern DID_ABT_PATTERN = Pattern
-			.compile("^did:abt:([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{35,36})$");
-
-	public static final String[] DIDDOCUMENT_AUTHENTICATION_TYPES = new String[] { "Ed25519SignatureAuthentication2018" };
+	public static final Pattern DID_ABT_PATTERN = Pattern.compile("^did:abt:(.*)$");
 
 	public static final String DEFAULT_ABT_URL = "https://did.abtnetwork.io";
 
