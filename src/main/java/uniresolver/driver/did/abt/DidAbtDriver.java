@@ -34,12 +34,10 @@ public class DidAbtDriver implements Driver {
 
 	private static Logger log = LoggerFactory.getLogger(DidAbtDriver.class);
 
-	// public static final Pattern DID_ABT_PATTERN =
-	// Pattern.compile("^did:abt:([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{25,34})$");
+	public static final Pattern DID_ABT_PATTERN = Pattern
+			.compile("^did:abt:([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{35,36})$");
 
-	public static final String[] DIDDOCUMENT_PUBLICKEY_TYPES = new String[] { "Secp256k1" };
-
-	public static final String[] DIDDOCUMENT_AUTHENTICATION_TYPES = new String[] { "Secp256k1" };
+	public static final String[] DIDDOCUMENT_AUTHENTICATION_TYPES = new String[] { "Ed25519SignatureAuthentication2018" };
 
 	public static final String DEFAULT_ABT_URL = "https://did.abtnetwork.io";
 
@@ -56,17 +54,18 @@ public class DidAbtDriver implements Driver {
 	@Override
 	public ResolveResult resolve(String identifier) throws ResolutionException {
 		// match
-		// Matcher matcher = DID_ABT_PATTERN.matcher(identifier);
-		// if(!matcher.matches()) {
-		// return null;
-		// }
+		Matcher matcher = DID_ABT_PATTERN.matcher(identifier);
+		if (!matcher.matches()) {
+			return null;
+		}
 
 		// fetch data from ABT
 		String resolveUrl = this.getABTUrl() + "/1.0/identifiers/" + identifier;
 		HttpGet httpGet = new HttpGet(resolveUrl);
 
 		// find the DDO
-		JSONObject didDocumentDO;
+		JSONObject resultJO;
+		DIDDocument didDocument;
 		try {
 			CloseableHttpResponse httpResponse = (CloseableHttpResponse) this.getHttpClient().execute(httpGet);
 			if (httpResponse.getStatusLine().getStatusCode() != 200) {
@@ -80,8 +79,9 @@ public class DidAbtDriver implements Driver {
 			EntityUtils.consume(httpEntity);
 
 			// get DDO
-			JSONObject jo = new JSONObject(entityString);
-			didDocumentDO = jo.getJSONObject("didDocument");
+			resultJO = new JSONObject(entityString);
+			JSONObject didDocumentJO = resultJO.getJSONObject("didDocument");
+			didDocument = DIDDocument.fromJson(didDocumentJO.toString());
 		} catch (IOException ex) {
 			throw new ResolutionException(
 					"Cannot retrieve DDO info for `" + identifier + "` from `" + this.getABTUrl() + "`: " + ex.getMessage(), ex);
@@ -90,49 +90,14 @@ public class DidAbtDriver implements Driver {
 					jex);
 		}
 
-		// DDO id
-		String id = identifier;
-
-		// DDO publicKeys
-		List<PublicKey> publicKeys = new ArrayList<>();
-		// // index 0 is auth key
-		// JSONObject firstKeyJO =
-		// didDocumentDO.getJSONArray("publicKey").getJSONObject(0);
-		// publicKeys.add(PublicKey.build(firstKeyJO.getString("id"),
-		// DIDDOCUMENT_PUBLICKEY_TYPES, null, null,
-		// firstKeyJO.getString("publicKeyHex"), null));
-		// // index 1 is recovery key
-		// JSONObject secondKeyJO =
-		// didDocumentDO.getJSONArray("publicKey").getJSONObject(1);
-		// publicKeys.add(PublicKey.build(secondKeyJO.getString("id"),
-		// DIDDOCUMENT_PUBLICKEY_TYPES, null, null,
-		// secondKeyJO.getString("publicKeyHex"), null));
-
-		// DDO Authentications
-		List<Authentication> authentications = new ArrayList<>();
-		// authentications.add(Authentication.build(null,
-		// DIDDOCUMENT_AUTHENTICATION_TYPES, firstKeyJO.getString("id")));
-
-		// DDO services
-		List<Service> services = new ArrayList<>();
-		JSONArray serviceJA = didDocumentDO.getJSONArray("service");
-		for (int i = 0; i < serviceJA.length(); i++) {
-			JSONObject service = serviceJA.getJSONObject(i);
-			services.add(Service.build(service.getString("type"), service.getString("serviceEndpoint")));
-		}
-
-		// create DDO
-		DIDDocument didDocument = DIDDocument.build(id, publicKeys, authentications, services);
-
-		// create Method METADATA
-		Map<String, Object> methodMetadata = new LinkedHashMap<>();
-		// methodMetadata.put("version", didDocumentDO.getInt("version"));
-		// methodMetadata.put("proof", didDocumentDO.getJSONObject("proof").toMap());
-		// methodMetadata.put("created", didDocumentDO.getString("created"));
-		// methodMetadata.put("updated", didDocumentDO.getString("updated"));
+		JSONObject resolverMetadataJO = resultJO.getJSONObject("resolverMetadata");
+		Map<String, Object> resolverMetadata = new LinkedHashMap<String, Object>();
+		resolverMetadata.put("identifier", resolverMetadataJO.getString("identifier"));
+		resolverMetadata.put("driverId", resolverMetadataJO.getString("driverId"));
+		resolverMetadata.put("didUrl", resolverMetadataJO.getJSONObject("didUrl").toMap());
 
 		// create RESOLVE RESULT
-		ResolveResult resolveResult = ResolveResult.build(didDocument, null, methodMetadata);
+		ResolveResult resolveResult = ResolveResult.build(didDocument, resolverMetadata, null);
 
 		// done
 		return resolveResult;
