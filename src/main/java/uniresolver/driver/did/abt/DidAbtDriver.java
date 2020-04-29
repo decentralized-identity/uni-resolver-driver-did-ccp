@@ -61,8 +61,7 @@ public class DidAbtDriver implements Driver {
 		HttpGet httpGet = new HttpGet(resolveUrl);
 
 		// find the DDO
-		JSONObject resultJO;
-		DIDDocument didDocument;
+		ResolveResult resolveResult;
 		try {
 			CloseableHttpResponse httpResponse = (CloseableHttpResponse) this.getHttpClient().execute(httpGet);
 			if (httpResponse.getStatusLine().getStatusCode() != 200) {
@@ -76,9 +75,7 @@ public class DidAbtDriver implements Driver {
 			EntityUtils.consume(httpEntity);
 
 			// get DDO
-			resultJO = new JSONObject(entityString);
-			JSONObject didDocumentJO = resultJO.getJSONObject("didDocument");
-			didDocument = DIDDocument.fromJson(didDocumentJO.toString());
+			resolveResult = ResolveResult.fromJson(entityString);
 		} catch (IOException ex) {
 			throw new ResolutionException(
 					"Cannot retrieve DDO info for `" + identifier + "` from `" + this.getABTUrl() + "`: " + ex.getMessage(), ex);
@@ -86,15 +83,6 @@ public class DidAbtDriver implements Driver {
 			throw new ResolutionException("Cannot parse JSON response from `" + this.getABTUrl() + "`: " + jex.getMessage(),
 					jex);
 		}
-
-		JSONObject resolverMetadataJO = resultJO.getJSONObject("resolverMetadata");
-		Map<String, Object> resolverMetadata = new LinkedHashMap<String, Object>();
-		resolverMetadata.put("identifier", resolverMetadataJO.getString("identifier"));
-		resolverMetadata.put("driverId", resolverMetadataJO.getString("driverId"));
-		resolverMetadata.put("didUrl", resolverMetadataJO.getJSONObject("didUrl").toMap());
-
-		// create RESOLVE RESULT
-		ResolveResult resolveResult = ResolveResult.build(didDocument, resolverMetadata, null);
 
 		// done
 		return resolveResult;

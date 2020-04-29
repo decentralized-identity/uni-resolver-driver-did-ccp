@@ -28,8 +28,8 @@ Then, add the USER Name and TOKEN to the environment variable as follows,
 ## Build and Run (Docker)
 
 ```
-docker build -f ./docker/Dockerfile . -t arcblock/driver-did-abt
-docker run -p 8080:8080 arcblock/driver-did-abt
+make build
+make run
 curl -X GET http://localhost:8080/1.0/identifiers/did:abt:z116ygT18P67xBp3scBtZLU6xVoDy268bgnU
 ```
 
