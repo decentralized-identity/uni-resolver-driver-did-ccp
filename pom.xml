@@ -2,10 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>uni-resolver-driver-did-ccp</artifactId>
+	<artifactId>uni-resolver-driver-did-abt</artifactId>
 	<packaging>${packaging.type}</packaging>
-	<name>uni-resolver-driver-did-ccp</name>
-	<version>0.2-SNAPSHOT</version>
+	<name>uni-resolver-driver-did-abt</name>
+	<version>0.1-SNAPSHOT</version>
 	<parent>
 		<groupId>decentralized-identity</groupId>
 		<artifactId>uni-resolver</artifactId>
