@@ -16,9 +16,8 @@ jobs:
       - name: Docker Build and Push
         uses: danubetech/github-action-docker-build-push@master
         env:
+          MAVEN_SETTINGS: ${{secrets.MAVEN_SETTINGS}}
           DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
           DOCKER_FILE: docker/Dockerfile
           CONTAINER_TAG: arcblock/driver-did-abt:latest
-          GITHUB_READ_PACKAGES_OWNER: dingpl716
-          GITHUB_READ_PACKAGES_TOKEN: ${{secrets.READ_PACKAGES_TOKEN}}
