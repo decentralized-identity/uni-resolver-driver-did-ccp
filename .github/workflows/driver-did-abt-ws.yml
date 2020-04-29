@@ -20,5 +20,5 @@ jobs:
           DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
           DOCKER_FILE: docker/Dockerfile
           CONTAINER_TAG: arcblock/driver-did-abt:latest
-          # GITHUB_READ_PACKAGES_OWNER: Peiling Ding
-          # GITHUB_READ_PACKAGES_TOKEN: ${{secrets.READ_PACKAGES_TOKEN}}
+          GITHUB_READ_PACKAGES_OWNER: Peiling Ding
+          GITHUB_READ_PACKAGES_TOKEN: ${{secrets.READ_PACKAGES_TOKEN}}
