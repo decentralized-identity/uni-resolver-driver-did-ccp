@@ -9,7 +9,7 @@
 	<parent>
 		<groupId>decentralized-identity</groupId>
 		<artifactId>uni-resolver</artifactId>
-		<version>0.1-SNAPSHOT</version>
+		<version>0.1.0</version>
 	</parent>
 
 	<profiles>
@@ -93,7 +93,7 @@
 		<dependency>
 			<groupId>decentralized-identity</groupId>
 			<artifactId>uni-resolver-driver</artifactId>
-			<version>0.1-SNAPSHOT</version>
+			<version>0.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.json</groupId>
