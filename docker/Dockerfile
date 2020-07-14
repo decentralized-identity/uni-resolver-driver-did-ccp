@@ -3,12 +3,6 @@
 FROM universalresolver/base-ubuntu
 MAINTAINER Markus Sabadello <markus@danubetech.com>
 
-# install dependencies
-
-ARG GITHUB_READ_PACKAGES_OWNER
-ARG GITHUB_READ_PACKAGES_TOKEN
-ADD ./settings.xml /root/.m2/
-
 # build driver-did-ccp
 
 ADD . /opt/driver-did-ccp
