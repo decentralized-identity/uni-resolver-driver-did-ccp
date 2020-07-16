@@ -12,13 +12,23 @@
 		<version>0.1.0</version>
 	</parent>
 
+	<repositories>
+		<repository>
+			<id>danubtech-maven-snapshots</id>
+			<url>https://repo.danubetech.com/repository/maven-snapshots/</url>
+		</repository>
+		<repository>
+			<id>danubtech-maven-releases</id>
+			<url>https://repo.danubetech.com/repository/maven-releases/</url>
+		</repository>
+	</repositories>
+
 	<profiles>
 		<profile>
 			<id>default</id>
 			<activation><activeByDefault>true</activeByDefault></activation>
 			<properties><packaging.type>jar</packaging.type></properties>
 		</profile>
-
 		<profile>
 			<id>war</id>
 			<properties><packaging.type>war</packaging.type></properties>
@@ -84,9 +94,7 @@
 					</plugin>
 				</plugins>
 			</build>
-
 		</profile>
-
 	</profiles>
 
 	<dependencies>
