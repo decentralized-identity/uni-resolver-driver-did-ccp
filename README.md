@@ -53,3 +53,4 @@ The driver returns the following metadata in addition to a DID document:
 ## Maintainer
 
 - Hongbin Mao [@hello2mao](https://github.com/hello2mao)
+- Junjie Yuan [@yjjnls](https://github.com/yjjnls)
